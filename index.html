@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes-App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@434&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Baloo Da 2', cursive;
+}
+.navbar{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: black;
+    height: 60px;
+    overflow: hidden;
+}
+
+.navbar ul li{
+    list-style: none;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.navbar ul li a{
+color: white;
+ text-decoration: none;
+ padding: 2px;
+
+}
+.navbar ul li a:hover{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    font-weight: bold;
+}
+#part-1,#part-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#part-1{
+    margin-right: 573px;
+    margin-left: -28px;
+
+}
+#part-2 input{
+    width: 220px;
+    height: 30px;
+    padding-left: 8px;
+    font-weight: bold;
+}
+#part-2 button{
+    margin-left: 3px;
+    width: 80px;
+    height: 34px;
+    border: 2px solid green;
+    color: rgb(0, 255, 17);
+    background-color: black;
+    border-radius: 2px;
+}
+#part-2 button:hover{
+    background-color: green;
+    color: white;
+    transition: 0.3s;
+}
+.writer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+#inputTxt{
+    border: 1.6px solid black;
+    border-radius: 2px;
+    width: 65%;
+    height: 90px;
+    font-size: 1.3rem;
+}
+.addNote{
+    margin-top: 5px;
+    width: 120px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: rgb(1, 136, 180);
+    font-weight: bold;
+    border: none;
+    color: rgb(33, 33, 33);
+    transition: 0.3s;
+}
+.addNote:hover{
+    background-color: green;
+    color: white; 
+}
+#notes{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.items{
+ border-radius: 8px;  
+ padding-bottom: 5px; 
+ padding-top: 5px;
+ width: 30%;
+ text-align: center;
+ margin-bottom: 10px;
+ margin-top: 5px;
+ margin-left: 5px;
+ margin-right: 5px;
+ border: 2px solid black;
+}
+@media only screen and (max-width:1100px){
+    #part-1{
+        margin-right: 258px;
+        margin-left: -10px;
+}
+}
+@media only screen and (max-width:750px){
+.navbar{
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+}
+#part-1{
+       margin: auto;
+       margin-bottom: 5px;
+       margin-top: 5px;
+}
+#part-2{
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+}
+@media only screen and (max-width:500px){
+    #inputTxt{
+        width: 95%;
+    }
+}
+    </style>
+</head>
+<body>
+ <nav class="navbar">
+     <ul id="part-1">
+         <h3 style="color: white; margin-right:10px">Notes-App</h3>
+         <li id="item-1"><a href="/">Home</a></li>
+         <li id="item-2"><a href="about.html">About</a></li>
+     </ul>
+    <ul id="part-2">
+        <input type="text" placeholder="Search" id="searchBar">
+        <button>Search</button>
+    </ul>
+ </nav>
+ <div class="writer">
+     <h1>Enter Notes Here</h1>
+     <textarea name="writer" id="inputTxt"></textarea>
+     <button id="addNote" class="addNote">Add Note</button>
+     <button class="addNote" id="deleteNotes">Delete all notes</button>
+ </div>
+ <hr/>
+ <div id="notes">
+     
+ </div>
+ <script>
+     let search=document.getElementById('searchBar');
+     let addNoteBtn=document.getElementById('addNote');
+     let deleteNoteBtn=document.getElementById('deleteNotes');
+     addNote(JSON.parse(localStorage.getItem('notes')));
+     deleteNoteBtn.addEventListener('click',()=>{
+         localStorage.clear();
+     })
+     addNoteBtn.addEventListener('click',()=>{ 
+        let inputTxt=document.getElementById('inputTxt');
+        let notes=localStorage.getItem('notes');
+        if(notes===null){
+            notesObj=[];
+        }
+        else{
+            notesObj=JSON.parse(notes);
+        }
+        notesObj.push(inputTxt.value);
+        localStorage.setItem('notes',JSON.stringify(notesObj));
+        inputTxt.value="";
+        addNote(notesObj);
+     });
+     function addNote(notesObj){
+      let note=document.getElementById('notes');
+      html="";
+      if(notesObj===null){
+          html="please add some notes";
+          note.innerText=html;
+      }
+      else{
+      notesObj.forEach((element,index) => {
+          html+=`<div class="items">
+         <h4>Note ${index+1}</h4>
+         <p>${element}</p>
+         <button class="addNote" id=${index} onClick="deleteNoteParti(this.id)">Delete note</button>
+     </div>`;
+      });
+    }
+      note.innerHTML=html;
+     }
+     deleteNoteBtn.addEventListener('click',()=>{
+     localStorage.clear();
+     addNote(JSON.parse(localStorage.getItem('notes')));
+     });
+     function deleteNoteParti(indexOfBtn){
+         let notes=localStorage.getItem('notes');
+         notesObj=JSON.parse(notes);
+         notesObj.splice(indexOfBtn,1);
+         localStorage.setItem('notes',JSON.stringify(notesObj));
+         addNote(notesObj);
+     }
+     search.addEventListener('input',()=>{
+         let elem=document.getElementsByClassName('items');
+         Array.from(elem).forEach((element)=>{
+           if((element.children[1].innerText).includes(search.value)){
+              element.style.display='block';
+           }
+           else{
+            element.style.display='none';
+           }
+         });
+     });
+ </script>
+</body>
+</html>

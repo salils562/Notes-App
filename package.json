@@ -1,0 +1,11 @@
+{
+  "name": "notesproject",
+  "version": "1.0.0",
+  "description": "This is the app I made using node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "salil sharma",
+  "license": "ISC"
+}

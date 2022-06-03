@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes-App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@434&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Baloo Da 2', cursive;
+        }
+        .navbar{
+            display: flex;
+            justify-content: space-evenly;
+            background-color: black;
+            height: 60px;
+            overflow: hidden;
+        }
+        
+        .navbar ul li{
+            list-style: none;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        .navbar ul li a{
+        color: white;
+         text-decoration: none;
+         padding: 2px;
+
+        }
+        .navbar ul li a:hover{
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #part-1,#part-2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #part-1{
+            margin-right: 573px;
+            margin-left: -28px;
+
+        }
+        #part-2 input{
+            width: 220px;
+            height: 30px;
+            padding-left: 8px;
+            font-weight: bold;
+        }
+        #part-2 button{
+            margin-left: 3px;
+            width: 80px;
+            height: 34px;
+            border: 2px solid green;
+            color: rgb(0, 255, 17);
+            background-color: black;
+            border-radius: 2px;
+        }
+        #part-2 button:hover{
+            background-color: green;
+            color: white;
+        }
+        .about{
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            margin-top: 50px;
+        }
+        @media only screen and (max-width:1100px){
+            #part-1{
+                margin-right: 258px;
+                margin-left: -10px;
+        }
+        }
+        @media only screen and (max-width:750px){
+        .navbar{
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            height: auto;
+        }
+        #part-1{
+               margin: auto;
+               margin-bottom: 5px;
+               margin-top: 5px;
+        }
+        #part-2{
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        }
+    </style>
+</head>
+<body>
+ <nav class="navbar">
+     <ul id="part-1">
+         <h3 style="color: white; margin-right:10px">Notes-App</h3>
+         <li id="item-1"><a href="/">Home</a></li>
+         <li id="item-2"><a href="/about">About</a></li>
+     </ul>
+    <ul id="part-2">
+        <input type="text" placeholder="Search">
+        <button>Search</button>
+    </ul>
+ </nav>
+ <div class="about">
+     <h1>About Us</h1>
+     <p>We are developers how Aim to develop web-applications and per user need. We belive in MERN stack
+         technology to serve for our clients. which is benificial for future traffic.
+     </p>
+ </div>
+</body>
+</html>
